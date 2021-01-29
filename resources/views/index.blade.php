@@ -44,7 +44,7 @@
         </div>
 
         <div class="row">
-            <div class="col col-7 offset-2">
+            <div class="col col-6 offset-2">
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item list-group-item-info">
                         Digitado:
@@ -55,15 +55,18 @@
                     <li class="list-group-item" id="caracteresDigitados">
                         0 Caracteres
                     </li>
-                    <li class="list-group-item list-group-item-success" id="sucesso">
+                    <li class="list-group-item list-group-item-success" id="sucesso" hidden>
                         <i class="fas fa-check"></i>
                     </li>
                 </ul>
             </div>
 
-            <div class="col col-1 d-flex justify-content-end">
-                <button class="btn btn-outline-success">
+            <div class="col col-2 d-flex justify-content-end">
+                <button id="btnSave" class="btn btn-outline-success" hidden>
                     <i class="fas fa-save"></i>
+                </button>
+                <button id="btnRefresh" class="btn btn-outline-danger" hidden>
+                    <i class="fas fa-redo"></i>
                 </button>
             </div>
         </div>
@@ -72,7 +75,7 @@
 
     <script>
 
-        var texto = $("#texto").text();
+        var texto = $("#texto").text()
         $("#palavras").text(texto.split(/\S+/).length - 1 + " Palavras");
         $("#caracteres").text(texto.length + " Caracteres");
 
@@ -81,10 +84,26 @@
             $("#palavrasDigitadas").text(textoDigitado.split(/\S+/).length - 1 + " Palavras");
             $("#caracteresDigitados").text(textoDigitado.length + " Caracteres");
             if(texto == textoDigitado){
-                $("#textarea").prop('readonly', true);
-                $("#sucesso").removeAttr('hidden');
+                readOnly("textarea", true);
+                unHidden("sucesso");
+                unHidden("btnSave");
+                unHidden("btnRefresh");
             }
         })
+
+        $("#btnRefresh").on('click', function(){
+            refresh();
+        });
+
+        function hidden(id) { $(`#${id}`).attr('hidden', true) }
+        function unHidden(id) { $(`#${id}`).removeAttr('hidden') }
+        function readOnly(id, option) { $(`#${id}`).prop('readonly', option); }
+        function refresh(){
+            readOnly("textarea", false);
+            //todo
+            $("#texto").text("");
+            $("#textarea").val("");
+        }
 
     </script>
 
