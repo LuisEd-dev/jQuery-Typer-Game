@@ -55,6 +55,9 @@
                     <li class="list-group-item" id="caracteresDigitados">
                         0 Caracteres
                     </li>
+                    <li class="list-group-item" id="segundosDigitados">
+                        <span id="segundos">0</span> Segundos
+                    </li>
                     <li class="list-group-item list-group-item-success" id="sucesso" hidden>
                         <i class="fas fa-check"></i>
                     </li>
@@ -95,6 +98,17 @@
             refresh();
         });
 
+        $("#textarea").one('focus', function(){
+            var tempo = $("#segundos").text();
+            var interval = setInterval(() => {
+                if($("#textarea").val() == texto){
+                    clearInterval(interval);
+                } else {
+                    $("#segundos").text(tempo++);
+                }
+            }, 1000);
+        });
+
         function hidden(id) { $(`#${id}`).attr('hidden', true) }
         function unHidden(id) { $(`#${id}`).removeAttr('hidden') }
         function readOnly(id, option) { $(`#${id}`).prop('readonly', option); }
@@ -104,6 +118,7 @@
             $("#texto").text("");
             $("#textarea").val("");
         }
+
 
     </script>
 
