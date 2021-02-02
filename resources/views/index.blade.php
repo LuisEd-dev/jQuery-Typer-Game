@@ -79,10 +79,28 @@
     <script>
 
         var texto = $("#texto").text()
-        $("#palavras").text(texto.split(/\S+/).length - 1 + " Palavras");
-        $("#caracteres").text(texto.length + " Caracteres");
 
-        $("#textarea").on('input', function() {
+        $(document).ready(function (){
+            contadoresTexto();
+            contadoresTextArea();
+            contadoresTempo();
+
+            $("#btnRefresh").click(function(){
+                refresh();
+            });
+
+        });
+
+        function contadoresTexto(){
+            $("#palavras").text(texto.split(/\S+/).length - 1 + " Palavras");
+            $("#caracteres").text(texto.length + " Caracteres");
+        }
+
+        function contadoresTextArea(){
+            $("#palavrasDigitadas").text("0 Palavras");
+            $("#caracteresDigitados").text("0 Caracteres");
+
+            $("#textarea").on('input', function() {
             var textoDigitado = $("#textarea").val();
             $("#palavrasDigitadas").text(textoDigitado.split(/\S+/).length - 1 + " Palavras");
             $("#caracteresDigitados").text(textoDigitado.length + " Caracteres");
@@ -91,34 +109,37 @@
                 unHidden("sucesso");
                 unHidden("btnSave");
                 unHidden("btnRefresh");
-            }
-        })
-
-        $("#btnRefresh").on('click', function(){
-            refresh();
-        });
-
-        $("#textarea").one('focus', function(){
-            var tempo = $("#segundos").text();
-            var interval = setInterval(() => {
-                if($("#textarea").val() == texto){
-                    clearInterval(interval);
-                } else {
-                    $("#segundos").text(tempo++);
                 }
-            }, 1000);
-        });
+            })
+        }
+
+        function contadoresTempo(){
+            $("#textarea").one('focus', function(){
+                var tempo = $("#segundos").text();
+                var interval = setInterval(() => {
+                    if($("#textarea").val() == texto){
+                        clearInterval(interval);
+                    } else {
+                        $("#segundos").text(++tempo);
+                    }
+                }, 1000);
+            });
+        }
 
         function hidden(id) { $(`#${id}`).attr('hidden', true) }
         function unHidden(id) { $(`#${id}`).removeAttr('hidden') }
         function readOnly(id, option) { $(`#${id}`).prop('readonly', option); }
+
         function refresh(){
             readOnly("textarea", false);
-            //todo
-            $("#texto").text("");
             $("#textarea").val("");
+            hidden('sucesso');
+            hidden("btnSave");
+            hidden("btnRefresh");
+            $("#segundos").text(0)
+            contadoresTextArea();
+            contadoresTempo();
         }
-
 
     </script>
 
