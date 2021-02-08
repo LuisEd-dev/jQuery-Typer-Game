@@ -65,7 +65,8 @@
             </div>
 
             <div class="col col-3 d-flex justify-content-end">
-                <form action="/teste" method="POST" id="formNome" hidden>
+                <form action="/" method="POST" id="formNome" hidden>
+                    @csrf
                     <input type="text" name="nome" id="inputNome">
                     <button id="btnSubmit" class="btn btn-outline-success">
                         <i id="iconSave" class="fas fa-save"></i>
@@ -97,6 +98,9 @@
 
             $("#btnSave").click(function(){
                 save();
+            });
+            $("#btnSave").one("click", function(){
+                criar();
             });
 
         });
@@ -158,6 +162,12 @@
             $("#iconSave").toggleClass("fa-check");
             hidden("btnSave");
             unHidden("formNome");
+
+        }
+
+        function criar(){
+            var inputTempo = $("input").attr("name", "tempo");
+            $("#formNome").append(inputTempo);
         }
 
     </script>

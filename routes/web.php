@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Usuario;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('index');
+});
+Route::post('/', function (Request $request) {
+    Usuario::create(['nome' => $request->nome, 'tempo' => $request->tempo]);
     return view('index');
 });
