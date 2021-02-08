@@ -44,7 +44,7 @@
         </div>
 
         <div class="row">
-            <div class="col col-6 offset-2">
+            <div class="col col-5 offset-2">
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item list-group-item-info">
                         Digitado:
@@ -64,9 +64,15 @@
                 </ul>
             </div>
 
-            <div class="col col-2 d-flex justify-content-end">
+            <div class="col col-3 d-flex justify-content-end">
+                <form action="/teste" method="POST" id="formNome" hidden>
+                    <input type="text" name="nome" id="inputNome">
+                    <button id="btnSubmit" class="btn btn-outline-success">
+                        <i id="iconSave" class="fas fa-save"></i>
+                    </button>
+                </form>
                 <button id="btnSave" class="btn btn-outline-success" hidden>
-                    <i class="fas fa-save"></i>
+                    <i id="iconSave" class="fas fa-save"></i>
                 </button>
                 <button id="btnRefresh" class="btn btn-outline-danger" hidden>
                     <i class="fas fa-redo"></i>
@@ -87,6 +93,10 @@
 
             $("#btnRefresh").click(function(){
                 refresh();
+            });
+
+            $("#btnSave").click(function(){
+                save();
             });
 
         });
@@ -136,9 +146,18 @@
             hidden('sucesso');
             hidden("btnSave");
             hidden("btnRefresh");
+            hidden("inputNome");
             $("#segundos").text(0)
             contadoresTextArea();
             contadoresTempo();
+        }
+
+        function save(){
+            unHidden("inputNome");
+            $("#iconSave").toggleClass("fa-save");
+            $("#iconSave").toggleClass("fa-check");
+            hidden("btnSave");
+            unHidden("formNome");
         }
 
     </script>
