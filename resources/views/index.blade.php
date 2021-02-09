@@ -65,9 +65,10 @@
             </div>
 
             <div class="col col-3 d-flex justify-content-end">
-                <form action="/teste" method="POST" id="formNome" hidden>
+                <form action="/" method="POST" id="formNome" hidden>
+                    @csrf
                     <input type="text" name="nome" id="inputNome">
-                    <button id="btnSubmit" class="btn btn-outline-success">
+                    <button id="btnSubmit" class="btn btn-outline-success" style="height: 100%">
                         <i id="iconSave" class="fas fa-save"></i>
                     </button>
                 </form>
