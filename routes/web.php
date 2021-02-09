@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Usuario;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('index', ["players" => Usuario::all()]);
+});
+Route::post('/', function (Request $request) {
+    DB::beginTransaction();
+    Usuario::create(['nome' => $request->nome, 'tempo' => $request->tempo]);
+    DB::commit();
+    return view('index', ["players" => Usuario::all()]);
 });

@@ -81,6 +81,31 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col col-12 text-center mt-5">
+                <h1>Placar</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-6 offset-2 mt-3">
+                <ul class="list-group">
+                    <li class="list-group-item active"> <b>Nome</b> </li>
+                    @foreach ($players as $player)
+                    <li class="list-group-item">{{ $player->nome }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col col-2 mt-3">
+                <ul class="list-group">
+                    <li class="list-group-item active"> <b>Tempo</b> </li>
+                    @foreach ($players as $player)
+                    <li class="list-group-item">{{ $player->tempo }} segundos</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -98,6 +123,9 @@
 
             $("#btnSave").click(function(){
                 save();
+            });
+            $("#btnSave").one("click", function(){
+                criar();
             });
 
         });
@@ -159,6 +187,12 @@
             $("#iconSave").toggleClass("fa-check");
             hidden("btnSave");
             unHidden("formNome");
+
+        }
+
+        function criar(){
+            var inputTempo = $("<input>").attr("name", "tempo").attr("hidden", true).attr("value", $("#segundos").text());
+            $("#formNome").append(inputTempo);
         }
 
     </script>
