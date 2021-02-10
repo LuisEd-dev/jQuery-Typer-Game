@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index', ["players" => Usuario::all()->sortBy("tempo")]);
+    return view('index', ["players" => Usuario::all()->sortBy("tempo")->take(15)]);
 });
 Route::post('/', function (Request $request) {
     DB::beginTransaction();
     Usuario::create(['nome' => $request->nome, 'tempo' => $request->tempo]);
     DB::commit();
-    return view('index', ["players" => Usuario::all()->sortBy("tempo")]);
+    return view('index', ["players" => Usuario::all()->sortBy("tempo")->take(15)]);
 });

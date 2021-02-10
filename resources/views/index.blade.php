@@ -13,7 +13,7 @@
 <body class="bg-info">
     <div class="container bg-light border rounded mt-5 pb-3">
         <div class="row">
-            <h1 class="text-center mt-3 mb-5">Typer Game <i class="fas fa-keyboard"></i></h1>
+            <h1 class="text-center mt-5 mb-5">Typer Game <i class="fas fa-keyboard"></i></h1>
         </div>
         <div class="row">
             <div class="col col-8 offset-2">
@@ -44,7 +44,7 @@
         </div>
 
         <div class="row">
-            <div class="col col-5 offset-2">
+            <div class="col col-6 offset-2">
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item list-group-item-info">
                         Digitado:
@@ -64,7 +64,7 @@
                 </ul>
             </div>
 
-            <div class="col col-3 d-flex justify-content-end">
+            <div class="col col-2 d-flex justify-content-end">
                 <form action="/" method="POST" id="formNome" hidden>
                     @csrf
                     <input type="text" name="nome" id="inputNome">
