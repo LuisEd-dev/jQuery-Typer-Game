@@ -17,7 +17,7 @@
         </div>
         <div class="row">
             <div class="col col-8 offset-2">
-                <p class="text-justify" id="texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, autem nisi repellat reiciendis, maiores beatae obcaecati odio illum culpa nam eligendi ex quam cupiditate vel? Quisquam veritatis eaque architecto quaerat!</p>
+                <p class="text-justify" id="texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus molestiae autem adipisci? Error aliquid at dicta soluta doloribus est cumque. Ducimus, cumque fuga? Expedita quae omnis accusamus commodi, tempora eveniet!</p>
             </div>
         </div>
 
@@ -81,6 +81,7 @@
             </div>
         </div>
 
+        @if (!$players->isEmpty())
         <div class="row">
             <div class="col col-12 text-center mt-5">
                 <h1>Placar</h1>
@@ -106,6 +107,8 @@
             </div>
         </div>
 
+        @endif
+
     </div>
 
     <script>
@@ -126,6 +129,10 @@
             });
             $("#btnSave").one("click", function(){
                 criar();
+            });
+
+            $("#textarea").bind('paste', function(e) {
+                e.preventDefault();
             });
 
         });
