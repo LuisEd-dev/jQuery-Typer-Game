@@ -11,18 +11,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body class="bg-info">
-    <div class="container bg-light border rounded mt-5 pb-3">
+    <div class="container bg-light border rounded mt-5 mb-5 pt-5 pb-5">
         <div class="row">
-            <h1 class="text-center mt-5 mb-5">Typer Game <i class="fas fa-keyboard"></i></h1>
+            <h1 class="text-center mb-5">Typer Game <i class="fas fa-keyboard"></i></h1>
         </div>
         <div class="row">
-            <div class="col col-8 offset-2">
-                <p class="text-justify" id="texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus molestiae autem adipisci? Error aliquid at dicta soluta doloribus est cumque. Ducimus, cumque fuga? Expedita quae omnis accusamus commodi, tempora eveniet!</p>
+            <div class="col col-lg-8 offset-lg-2">
+                <p class="text-justify" id="texto">Lorem </p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col col-8 offset-2">
+            <div class="col col-lg-8 offset-lg-2">
                 <ul class="list-group list-group-horizontal d-flex justify-content-end">
                     <li class="list-group-item list-group-item-info">
                         Texto:
@@ -38,13 +38,13 @@
         </div>
 
         <div class="row">
-            <div class="col col-8 offset-2">
+            <div class="col col-lg-8 offset-lg-2">
                 <textarea class="w-100 mt-3 mb-3" id="textarea" rows="10"></textarea>
             </div>
         </div>
 
         <div class="row">
-            <div class="col col-6 offset-2">
+            <div class="col col-lg-6 offset-lg-2">
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item list-group-item-info">
                         Digitado:
@@ -64,10 +64,10 @@
                 </ul>
             </div>
 
-            <div class="col col-2 d-flex justify-content-end">
+            <div class="col col-lg-2 d-flex justify-content-end">
                 <form action="/" method="POST" id="formNome" hidden>
                     @csrf
-                    <input type="text" name="nome" id="inputNome">
+                    <input type="text" name="nome" id="inputNome" style="width: 75%" placeholder="Seu Nome" required>
                     <button id="btnSubmit" class="btn btn-outline-success" style="height: 100%">
                         <i id="iconSave" class="fas fa-save"></i>
                     </button>
@@ -82,14 +82,17 @@
         </div>
 
         @if (!$players->isEmpty())
+
+        <hr class="mt-5 mb-5">
+
         <div class="row">
-            <div class="col col-12 text-center mt-5">
-                <h1>Placar</h1>
+            <div class="col col-12 text-center">
+                <h1>Placar <i class="fas fa-star"></i></h1>
             </div>
         </div>
 
         <div class="row">
-            <div class="col col-6 offset-2 mt-3">
+            <div class="col col-lg-6 offset-lg-2 mt-3">
                 <ul class="list-group">
                     <li class="list-group-item active"> <b>Nome</b> </li>
                     @foreach ($players as $player)
@@ -97,7 +100,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="col col-2 mt-3">
+            <div class="col col-lg-2 mt-3">
                 <ul class="list-group">
                     <li class="list-group-item active"> <b>Tempo</b> </li>
                     @foreach ($players as $player)
@@ -189,6 +192,7 @@
         }
 
         function save(){
+            hidden("btnRefresh")
             unHidden("inputNome");
             $("#iconSave").toggleClass("fa-save");
             $("#iconSave").toggleClass("fa-check");
