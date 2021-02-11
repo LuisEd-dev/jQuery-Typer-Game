@@ -17,7 +17,7 @@
         </div>
         <div class="row">
             <div class="col col-lg-8 offset-lg-2">
-                <p class="text-justify" id="texto">Lorem </p>
+                <p class="text-justify" id="texto">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio voluptatem explicabo corporis saepe fugit veritatis dolorem consequuntur unde quae architecto, maiores obcaecati facere sapiente dolore quos adipisci. Harum, laborum illum. </p>
             </div>
         </div>
 
