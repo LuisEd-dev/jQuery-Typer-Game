@@ -17,7 +17,7 @@
         </div>
         <div class="row">
             <div class="col col-lg-8 offset-lg-2">
-                <p class="text-justify" id="texto">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio voluptatem explicabo corporis saepe fugit veritatis dolorem consequuntur unde quae architecto, maiores obcaecati facere sapiente dolore quos adipisci. Harum, laborum illum. </p>
+                <p class="text-justify" id="texto">Lorem</p>
             </div>
         </div>
 
@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" id="placar">
             <div class="col col-lg-6 offset-lg-2 mt-3">
                 <ul class="list-group">
                     <li class="list-group-item active"> <b>Nome</b> </li>
@@ -109,9 +109,7 @@
                 </ul>
             </div>
         </div>
-
         @endif
-
     </div>
 
     <script>
@@ -206,7 +204,17 @@
             $("#formNome").append(inputTempo);
         }
 
+        function scrollPlacar(){
+            var placarPosition = $("#placar").offset().top;
+            $(window).scrollTop(placarPosition);
+
+        }
+
     </script>
+
+    @if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {!! "<script> scrollPlacar() </script>" !!}
+    @endif
 
 </body>
 </html>
