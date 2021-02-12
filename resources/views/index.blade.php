@@ -85,8 +85,6 @@
             <div class="col col-2 offset-5 text-center">
                 <button class="btn btn-lg btn-primary rounded-circle" onclick="exibicaoPlacar()">
                     <i id="seta" style="padding: 10px 5px" class="fas fa-arrow-up" data-toggle="tooltip" data-placement="top" title="Ocultar Placar"></i>
-                    {{-- <i id="seta" style="padding: 10px 5px" class="fas fa-arrow-down" data-toggle="tooltip" data-placement="top" title="Exibir Placar"></i> --}}
-
                 </button>
             </div>
 
@@ -226,11 +224,10 @@
 
         function exibicaoPlacar(){
             $("#placar").stop().slideToggle(1000);
-            $("#seta").toggleClass("fa-arrow-up", 1000);
-            $("#seta").toggleClass("fa-arrow-down", 1000);
-            var text = $('#seta').attr('data-bs-original-title');
-            $('#seta').attr("data-bs-original-title", (text == "Exibir Placar") ? "Ocultar Placar" : "Exibir Placar" );
-            }
+            $("#seta").toggleClass("fa-arrow-up");
+            $("#seta").toggleClass("fa-arrow-down");
+            $('#seta').attr("data-bs-original-title", ($('#seta').attr('data-bs-original-title') == "Exibir Placar") ? "Ocultar Placar" : "Exibir Placar" );
+        }
 
     </script>
 
