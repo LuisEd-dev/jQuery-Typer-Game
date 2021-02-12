@@ -81,34 +81,48 @@
             </div>
         </div>
 
+        <div class="row mt-3">
+            <div class="col col-2 offset-5 text-center">
+                <button class="btn btn-lg btn-primary rounded-circle" onclick="exibicaoPlacar()">
+                    <i id="seta" style="padding: 10px 5px" class="fas fa-arrow-up" data-toggle="tooltip" data-placement="top" title="Ocultar Placar"></i>
+                    {{-- <i id="seta" style="padding: 10px 5px" class="fas fa-arrow-down" data-toggle="tooltip" data-placement="top" title="Exibir Placar"></i> --}}
+
+                </button>
+            </div>
+
+        </div>
+
         @if (!$players->isEmpty())
 
-        <hr class="mt-5 mb-5">
+        <div id="placar">
+            <hr class="mt-5 mb-5">
 
-        <div class="row">
-            <div class="col col-12 text-center">
-                <h1>Placar <i class="fas fa-star"></i></h1>
+            <div class="row">
+                <div class="col col-12 text-center">
+                    <h1>Placar <i class="fas fa-star"></i></h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 offset-lg-2 mt-3">
+                    <ul class="list-group">
+                        <li class="list-group-item active"> <b>Nome</b> </li>
+                        @foreach ($players as $player)
+                        <li class="list-group-item">{{ $player->nome }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="col col-lg-2 mt-3">
+                    <ul class="list-group">
+                        <li class="list-group-item active"> <b>Tempo</b> </li>
+                        @foreach ($players as $player)
+                        <li class="list-group-item">{{ $player->tempo }} segundos</li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <div class="row" id="placar">
-            <div class="col col-lg-6 offset-lg-2 mt-3">
-                <ul class="list-group">
-                    <li class="list-group-item active"> <b>Nome</b> </li>
-                    @foreach ($players as $player)
-                    <li class="list-group-item">{{ $player->nome }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            <div class="col col-lg-2 mt-3">
-                <ul class="list-group">
-                    <li class="list-group-item active"> <b>Tempo</b> </li>
-                    @foreach ($players as $player)
-                    <li class="list-group-item">{{ $player->tempo }} segundos</li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
         @endif
     </div>
 
@@ -117,6 +131,9 @@
         var texto = $("#texto").text()
 
         $(document).ready(function (){
+
+            $('[data-toggle="tooltip"]').tooltip({trigger: 'hover'});
+
             contadoresTexto();
             contadoresTextArea();
             contadoresTempo();
@@ -196,7 +213,6 @@
             $("#iconSave").toggleClass("fa-check");
             hidden("btnSave");
             unHidden("formNome");
-
         }
 
         function criar(){
@@ -205,15 +221,21 @@
         }
 
         function scrollPlacar(){
-            var placarPosition = $("#placar").offset().top;
-            $(window).scrollTop(placarPosition);
-
+            $(window).scrollTop($("#placar").offset().top);
         }
+
+        function exibicaoPlacar(){
+            $("#placar").stop().slideToggle(1000);
+            $("#seta").toggleClass("fa-arrow-up", 1000);
+            $("#seta").toggleClass("fa-arrow-down", 1000);
+            var text = $('#seta').attr('data-bs-original-title');
+            $('#seta').attr("data-bs-original-title", (text == "Exibir Placar") ? "Ocultar Placar" : "Exibir Placar" );
+            }
 
     </script>
 
     @if ($_SERVER["REQUEST_METHOD"] == "POST")
-    {!! "<script> scrollPlacar() </script>" !!}
+        {!! "<script> scrollPlacar() </script>" !!}
     @endif
 
 </body>
