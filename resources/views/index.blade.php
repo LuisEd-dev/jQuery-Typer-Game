@@ -133,33 +133,11 @@
 
         $(document).ready(function (){
 
-            $('[data-toggle="tooltip"]').tooltip();
-
-            $("#seta").mouseenter(function(){
-                $("#seta").tooltip('show');
-            });
-            $("#iconSeta").mouseenter(function(){
-                $("#seta").tooltip('show');
-            });
+            setarAcoes();
 
             contadoresTexto();
             contadoresTextArea();
             contadoresTempo();
-
-            $("#btnRefresh").click(function(){
-                refresh();
-            });
-
-            $("#btnSave").click(function(){
-                save();
-            });
-            $("#btnSave").one("click", function(){
-                criar();
-            });
-
-            $("#textarea").bind('paste', function(e) {
-                e.preventDefault();
-            });
 
         });
 
@@ -244,8 +222,35 @@
             texto = leroLero(2);
             $("#texto").text(texto)
             refresh();
-            $("#texto").append($('<i onclick="mudarFrase()" class="fas fa-random p-1 float-left"></i>'));
+            $("#texto").append($('<i onclick="mudarFrase()" class="fas fa-random p-1"></i>'));
         };
+
+        function setarAcoes(){
+            $("#btnRefresh").click(function(){
+                refresh();
+            });
+
+            $("#btnSave").click(function(){
+                save();
+            });
+            $("#btnSave").one("click", function(){
+                criar();
+            });
+
+            $("#textarea").bind('paste', function(e) {
+                e.preventDefault();
+            });
+
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $("#seta").mouseenter(function(){
+                $("#seta").tooltip('show');
+            });
+            $("#iconSeta").mouseenter(function(){
+                $("#seta").tooltip('show');
+            });
+
+        }
 
     </script>
 
