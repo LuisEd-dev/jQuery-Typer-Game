@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             <div class="col col-lg-8 offset-lg-2">
-                <p class="text-justify" id="texto">Lorem</p>
+                <p class="text-justify" id="texto"></p>
             </div>
         </div>
 
@@ -83,6 +83,7 @@
             </div>
         </div>
 
+        @if (!$players->isEmpty())
         <div class="row mt-3">
             <div class="col col-2 offset-5 text-center">
                 <button id="seta" class="btn btn-lg btn-primary rounded-circle" onclick="exibicaoPlacar()" data-toggle="tooltip" data-placement="top" title="Ocultar Placar">
@@ -91,8 +92,6 @@
             </div>
 
         </div>
-
-        @if (!$players->isEmpty())
 
         <div id="placar">
             <hr class="mt-5 mb-5">
@@ -129,7 +128,8 @@
     <script>
 
         var texto = leroLero(2);
-        $("#texto").text(texto)
+        $("#texto").text(texto);
+        $("#texto").append($('<i onclick="mudarFrase()" class="fas fa-random p-1 float-left"></i>'));
 
         $(document).ready(function (){
 
@@ -210,6 +210,7 @@
             hidden("btnRefresh");
             hidden("inputNome");
             $("#segundos").text(0)
+            contadoresTexto();
             contadoresTextArea();
             contadoresTempo();
         }
@@ -238,6 +239,13 @@
             $("#iconSeta").toggleClass("fa-arrow-down");
             $('#seta').attr("data-bs-original-title", ($('#seta').attr('data-bs-original-title') == "Exibir Placar") ? "Ocultar Placar" : "Exibir Placar" );
         }
+
+        function mudarFrase(){
+            texto = leroLero(2);
+            $("#texto").text(texto)
+            refresh();
+            $("#texto").append($('<i onclick="mudarFrase()" class="fas fa-random p-1 float-left"></i>'));
+        };
 
     </script>
 
