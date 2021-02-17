@@ -21,7 +21,17 @@ Route::get('/', function () {
 });
 Route::post('/', function (Request $request) {
     DB::beginTransaction();
-    Usuario::create(['nome' => $request->nome, 'tempo' => $request->tempo]);
+    $create = Usuario::create(['nome' => $request->nome, 'tempo' => $request->tempo]);
     DB::commit();
-    return view('index', ["players" => Usuario::all()->sortBy("tempo")->take(15)]);
+
+    $count = 1;
+    foreach (Usuario::all()->sortBy("tempo") as $teste){
+        if($teste->id == $create->id){
+            $colocacao = $count;
+        }
+        $count++;
+    }
+
+    return view('index', ["players" => Usuario::all()->sortBy("tempo")->take(15),
+                            "colocacao" => $colocacao]);
 });

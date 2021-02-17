@@ -120,6 +120,19 @@
                     </ul>
                 </div>
             </div>
+
+            @if ($_SERVER["REQUEST_METHOD"] == "POST")
+
+            <div class="row">
+                <div class="col col-lg-8 offset-lg-2 mt-3">
+                    <div class="alert alert-info" role="alert">
+                        Você está no {{ $colocacao }}° lugar do placar.
+                    </div>
+                </div>
+            </div>
+
+            @endif
+
         </div>
 
         @endif
@@ -151,14 +164,14 @@
             $("#caracteresDigitados").text("0 Caracteres");
 
             $("#textarea").on('input', function() {
-            var textoDigitado = $("#textarea").val();
-            $("#palavrasDigitadas").text(textoDigitado.split(/\S+/).length - 1 + " Palavras");
-            $("#caracteresDigitados").text(textoDigitado.length + " Caracteres");
-            if(texto == textoDigitado){
-                readOnly("textarea", true);
-                unHidden("sucesso");
-                unHidden("btnSave");
-                unHidden("btnRefresh");
+                var textoDigitado = $("#textarea").val();
+                $("#palavrasDigitadas").text(textoDigitado.split(/\S+/).length - 1 + " Palavras");
+                $("#caracteresDigitados").text(textoDigitado.length + " Caracteres");
+                if(texto == textoDigitado){
+                    readOnly("textarea", true);
+                    unHidden("sucesso");
+                    unHidden("btnSave");
+                    unHidden("btnRefresh");
                 }
             })
         }
@@ -167,7 +180,8 @@
             $("#textarea").one('focus', function(){
                 var tempo = $("#segundos").text();
                 var interval = setInterval(() => {
-                    if($("#textarea").val() == texto){
+                    if($("#textarea").val() == texto || $("#textarea").attr("refresh") == "true"){
+                        $("#textarea").attr("refresh", false)
                         clearInterval(interval);
                     } else {
                         $("#segundos").text(++tempo);
@@ -180,9 +194,10 @@
         function unHidden(id) { $(`#${id}`).removeAttr('hidden') }
         function readOnly(id, option) { $(`#${id}`).prop('readonly', option); }
 
-        function refresh(){
+        function refresh(param){
             readOnly("textarea", false);
             $("#textarea").val("");
+            $("#textarea").attr("refresh", param);
             hidden('sucesso');
             hidden("btnSave");
             hidden("btnRefresh");
@@ -221,13 +236,13 @@
         function mudarFrase(){
             texto = leroLero(2);
             $("#texto").text(texto)
-            refresh();
+            refresh(true);
             $("#texto").append($('<i onclick="mudarFrase()" class="fas fa-random p-1"></i>'));
         };
 
         function setarAcoes(){
             $("#btnRefresh").click(function(){
-                refresh();
+                refresh(false);
             });
 
             $("#btnSave").click(function(){
@@ -246,6 +261,7 @@
             $("#seta").mouseenter(function(){
                 $("#seta").tooltip('show');
             });
+
             $("#iconSeta").mouseenter(function(){
                 $("#seta").tooltip('show');
             });
