@@ -228,6 +228,11 @@
 
         function exibicaoPlacar(){
             $("#placar").stop().slideToggle(1000);
+            if($('#seta').attr('data-bs-original-title') == "Exibir Placar"){
+                $('html, body').animate({
+                    scrollTop: $("#placar").offset().top
+                }, 1000);
+            }
             $("#iconSeta").toggleClass("fa-arrow-up");
             $("#iconSeta").toggleClass("fa-arrow-down");
             $('#seta').attr("data-bs-original-title", ($('#seta').attr('data-bs-original-title') == "Exibir Placar") ? "Ocultar Placar" : "Exibir Placar" );
@@ -264,6 +269,14 @@
 
             $("#iconSeta").mouseenter(function(){
                 $("#seta").tooltip('show');
+            });
+
+            $("#seta").mouseout(function(){
+                $("#seta").tooltip('hide');
+            });
+
+            $("#iconSeta").mouseout(function(){
+                $("#seta").tooltip('hide');
             });
 
         }
